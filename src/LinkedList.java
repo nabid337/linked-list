@@ -38,6 +38,7 @@ public class LinkedList {
     }
 
     public boolean detectLoop(){
+        if(size == 1) return false;
         NodeClass slow_mo = head;
         NodeClass fast_mo = head;
         while(slow_mo!=null && fast_mo!=null && fast_mo.next.next!=null){
