@@ -1,7 +1,11 @@
 package binary_search_tree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BinarySearchTree {
     Node root;
+    List<Node> nodes = new ArrayList<>();
 
     public BinarySearchTree() {
         root = null;
@@ -11,20 +15,20 @@ public class BinarySearchTree {
         root = insertRec(root, value);
     }
 
-    Node insertRec(Node root, int value) {
+    Node insertRec(Node current, int value) {
 
-        if (root == null) {
+        if (current == null) {
             // Node node = new Node(value);
-            root = new Node(value);
-            return root;
+            current = new Node(value);
+            return current;
         }
 
-        if (root.value > value) {
-            root.left = insertRec(root.left, value);
-        } else if (root.value < value) {
-            root.right = insertRec(root.right, value);
+        if (current.value > value) {
+            current.left = insertRec(current.left, value);
+        } else if (current.value < value) {
+            current.right = insertRec(current.right, value);
         }
-        return root;
+        return current;
     }
 
     void inOrderPrint() {
@@ -34,6 +38,7 @@ public class BinarySearchTree {
     void inOrderPrintRec(Node root) {
         if (root != null) {
             inOrderPrintRec(root.left);
+            nodes.add(root);
             System.out.println(root.value);
             inOrderPrintRec(root.right);
         }
