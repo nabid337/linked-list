@@ -1,5 +1,9 @@
 package red_black_tree;
 
+/**
+ * Implemented from sudo code described in https://en.wikipedia.org/wiki/Red%E2%80%93black_tree
+ * Java Implementation
+ */
 public class RedBlackTree {
     Node root;
 
@@ -52,9 +56,31 @@ public class RedBlackTree {
 
     void repairTree(Node node){
         if(getParent(node) == null) repairCase1(node);
+        else if(getParent(node).color == NodeColor.BLACK) repairCase2();
+        else if(getUncle(node)!=null && getUncle(node).color == NodeColor.RED ) repairCase3(node);
+        else repairCase4(node);
     }
     void repairCase1(Node node){
         node.color = NodeColor.BLACK;
     }
+
+    void repairCase2(){
+
+    }
+
+    void repairCase3(Node node){
+        getParent(node).color = NodeColor.BLACK;
+        getUncle(node).color = NodeColor.BLACK;
+        getGrandParent(node).color = NodeColor.RED;
+        repairTree(getGrandParent(node));
+    }
+
+    void repairCase4(Node node){
+        //step1
+
+        //step2
+    }
+
+
 
 }
