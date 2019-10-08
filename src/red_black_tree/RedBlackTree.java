@@ -61,7 +61,6 @@ public class RedBlackTree {
     void rotateRight(Node node){
         Node nnew = node.left;
         if(nnew == null) return;
-
         Node parent  = getParent(node);
 
         node.left = nnew.right;
