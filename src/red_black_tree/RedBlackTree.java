@@ -33,6 +33,56 @@ public class RedBlackTree {
         return getSibling(parent);
     }
 
+    void rotateLeft(Node node){
+        Node nnew = node.right;
+        if(nnew == null) return;
+
+        Node parent  = getParent(node);
+
+        node.right = nnew.left;
+        nnew.left = node;
+        node.parent = nnew;
+
+        node.right.parent = node;
+
+        if(parent!=null){
+            if(node == parent.left){
+                parent.left = nnew;
+            }
+            else if(node ==parent.right) parent.right = nnew;
+        }
+        else {
+            root = nnew;
+        }
+        //nnew.parent = parent;
+
+    }
+
+    void rotateRight(Node node){
+        Node nnew = node.left;
+        if(nnew == null) return;
+
+        Node parent  = getParent(node);
+
+        node.left = nnew.right;
+        nnew.right = node;
+        node.parent = nnew;
+
+        node.left.parent = node;
+
+        if(parent!=null){
+            if(node == parent.left){
+                parent.left = nnew;
+            }
+            else if(node ==parent.right) parent.right = nnew;
+        }
+        else {
+            root = nnew;
+        }
+        //nnew.parent = parent;
+
+    }
+
     Node insert(Node node){
         root = insertRec(root, node);
         repairTree(node);
