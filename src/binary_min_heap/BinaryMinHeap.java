@@ -16,7 +16,7 @@ public class BinaryMinHeap {
     }
 
     int[] getArray(){
-        return array;
+        return this.array;
     }
 
     int getParent(int i){
@@ -43,11 +43,36 @@ public class BinaryMinHeap {
         return 0;
     }
 
+    /*void swap(int parent, int value){
+        int temp = parent;
+        parent = value;
+        value = temp;
+    }*/
     void insert(int value){
+        if(heapSize  == capacity) {
+            System.out.println("capacity exceeded");
+            return;
+        }
+        this.array[heapSize] = value;
 
+        int parentPosition = getParent(heapSize);
+        if(value < array[parentPosition]){
+            int temp = array[parentPosition];
+            array[parentPosition] = value;
+            array[heapSize] = temp;
+        }
+        this.heapSize++;
     }
 
     void deleteByValue(){
 
+    }
+
+    void print() {
+        for (int i = 0; i < array.length; i++) {
+           // System.out.println(array[i]);
+            System.out.printf(" " + array[i]);
+        }
+        System.out.println();
     }
 }
