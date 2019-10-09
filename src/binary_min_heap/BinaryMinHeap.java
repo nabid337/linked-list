@@ -5,72 +5,99 @@ public class BinaryMinHeap {
     int capacity;
     int heapSize;
 
-    BinaryMinHeap(int capacity){
+    BinaryMinHeap(int capacity) {
         this.array = new int[capacity];
         this.capacity = capacity;
         this.heapSize = 0;
     }
 
-    int getCapacity(){
+    int getCapacity() {
         return capacity;
     }
 
-    int[] getArray(){
+    int[] getArray() {
         return this.array;
     }
 
-    int getParent(int i){
-        return (i-1)/2;
+    int getParent(int i) {
+        return (i - 1) / 2;
     }
 
-    int leftChild(int i){
-        return 2*i + 1;
+    int leftChild(int i) {
+        return 2 * i + 1;
     }
 
-    int rightChild(int i){
-        return 2*i + 2;
+    int rightChild(int i) {
+        return 2 * i + 2;
     }
 
-    int getMin(){
+    int getMin() {
         return array[0];
     }
 
-    void minHeapify(){
+    void minHeapify(int i) {
+
+        int left = leftChild(i);
+        int right = rightChild(i);
+        int smallest;
+        if (left <= heapSize && right <= heapSize) {
+            int rightVal = right<array.length? array[right]: 500;
+            if (array[left] < rightVal) {
+                smallest = array[left];
+                array[i] = smallest;
+                i = left;
+            } else if (rightVal < array[left]) {
+                smallest = rightVal;
+                array[i] = smallest;
+                i = right;
+            }
+            minHeapify(i);
+        }
+
 
     }
 
-    int extractMin(){
-        return 0;
+    int extractMin() {
+        int min = array[0];
+       // heapSize--;
+        minHeapify(0);
+        heapSize--;
+        return min;
     }
 
-    /*void swap(int parent, int value){
-        int temp = parent;
-        parent = value;
-        value = temp;
-    }*/
-    void insert(int value){
-        if(heapSize  == capacity) {
+    void swap(int parentPos, int valuePos) {
+        int temp = array[parentPos];
+        array[parentPos] = array[valuePos];
+        array[valuePos] = temp;
+    }
+
+    void insert(int value) {
+        if (heapSize == capacity) {
             System.out.println("capacity exceeded");
             return;
         }
         this.array[heapSize] = value;
+        int i = heapSize;
 
         int parentPosition = getParent(heapSize);
-        if(value < array[parentPosition]){
-            int temp = array[parentPosition];
-            array[parentPosition] = value;
-            array[heapSize] = temp;
+        while (i != 0 && value < array[parentPosition]) {
+            swap(parentPosition, i);
+            i = parentPosition;
+            parentPosition = getParent(parentPosition);
         }
+        /*if(value < array[parentPosition]){
+            swap(parentPosition, heapSize);
+        }*/
         this.heapSize++;
     }
 
-    void deleteByValue(){
+    void deleteByValue() {
 
     }
 
     void print() {
-        for (int i = 0; i < array.length; i++) {
-           // System.out.println(array[i]);
+        for (int i = 0; i < heapSize; i++) {
+            // System.out.println(array[i]);
             System.out.printf(" " + array[i]);
         }
         System.out.println();

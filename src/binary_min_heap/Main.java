@@ -22,7 +22,10 @@ public class Main {
         minHeap.print();
         minHeap.insert(64);
         minHeap.print();
-        minHeap.insert(53);
+        minHeap.insert(2);
+        minHeap.print();
+
+        System.out.println("extract min:" + minHeap.extractMin());
         minHeap.print();
     }
 }
