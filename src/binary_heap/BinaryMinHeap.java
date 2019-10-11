@@ -1,4 +1,4 @@
-package binary_min_heap;
+package binary_heap;
 
 public class BinaryMinHeap {
     int array[];
@@ -36,33 +36,34 @@ public class BinaryMinHeap {
     }
 
     void minHeapify(int i) {
-
         int left = leftChild(i);
         int right = rightChild(i);
-        int smallest;
-        if (left <= heapSize && right <= heapSize) {
-            int rightVal = right<array.length? array[right]: 500;
-            if (array[left] < rightVal) {
-                smallest = array[left];
-                array[i] = smallest;
-                i = left;
-            } else if (rightVal < array[left]) {
-                smallest = rightVal;
-                array[i] = smallest;
-                i = right;
-            }
-            minHeapify(i);
+        int smallest = i;
+
+        if(left<heapSize && array[left]<array[i]){
+            smallest = left;
+        }
+        if(right<heapSize && array[right]<array[smallest]){
+            smallest = right;
         }
 
+
+        if(smallest!=i){
+            swap(smallest, i);
+            minHeapify(smallest);
+        }
 
     }
 
     int extractMin() {
-        int min = array[0];
-       // heapSize--;
-        minHeapify(0);
+        if(heapSize==0) return Integer.MAX_VALUE;
+        if(heapSize == 1) return array[0];
+
+        int root = array[0];
+        array[0] = array[heapSize-1];
         heapSize--;
-        return min;
+        minHeapify(0);
+        return root;
     }
 
     void swap(int parentPos, int valuePos) {
