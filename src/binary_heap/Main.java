@@ -4,32 +4,27 @@ public class Main {
     public static void main(String args[]){
         System.out.println("hello world");
         BinaryMinHeap minHeap = new BinaryMinHeap(10);
-        minHeap.insert(5);
-       // minHeap.print();
-        minHeap.insert(14);
-       // minHeap.print();
-        minHeap.insert(23);
-      //  minHeap.print();
-        minHeap.insert(1);
-       // minHeap.print();
-        minHeap.insert(41);
-       // minHeap.print();
-        minHeap.insert(87);
-      //  minHeap.print();
-        minHeap.insert(90);
-       // minHeap.print();
-        minHeap.insert(50);
-       // minHeap.print();
-        minHeap.insert(64);
-      //  minHeap.print();
-        minHeap.insert(2);
-       // minHeap.print();
+        int heapArray[] = {5,14,23,1,41,87,90,50,64,2};
 
+        for(int i=0; i<heapArray.length; i++){
+            minHeap.insert(heapArray[i]);
+        }
         int size = minHeap.heapSize;
         for(int i=0; i<size; i++){
 
             System.out.print(minHeap.extractMin() + " ");
         }
+
+        BinaryMaxHeap maxHeap = new BinaryMaxHeap(10);
+        for(int i=0; i<heapArray.length; i++){
+            maxHeap.insert(heapArray[i]);
+        }
+
+        int maxHeapsize = maxHeap.heapSize;
+        for(int i=0; i<maxHeapsize; i++){
+            System.out.print(maxHeap.extractMax() + " ");
+        }
+
 
 
 
